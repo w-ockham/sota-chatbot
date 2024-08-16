@@ -1,0 +1,175 @@
+app:
+  description: SOTA日本支部へようこそ。SOTAに関する質問にお答えします。
+  icon: ⛰️
+  icon_background: '#E4FBCC'
+  mode: agent-chat
+  name: SOTAに関する質問にお答えします(GPT-4o-mini)
+kind: app
+model_config:
+  agent_mode:
+    enabled: true
+    max_iteration: 5
+    strategy: function_call
+    tools:
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: 0df4f798-624c-417a-95d3-25c99e5cd669
+      provider_name: SOTA日本支部情報
+      provider_type: api
+      tool_name: Info_by_ref
+      tool_parameters:
+        summit: ''
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: 0df4f798-624c-417a-95d3-25c99e5cd669
+      provider_name: SOTA日本支部情報
+      provider_type: api
+      tool_name: Info_by_name
+      tool_parameters:
+        summit: ''
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: 0df4f798-624c-417a-95d3-25c99e5cd669
+      provider_name: SOTA日本支部情報
+      provider_type: api
+      tool_name: Info_by_location
+      tool_parameters:
+        summit: ''
+    - enabled: false
+      isDeleted: false
+      notAuthor: false
+      provider_id: 0df4f798-624c-417a-95d3-25c99e5cd669
+      provider_name: SOTA日本支部情報
+      provider_type: api
+      tool_name: Count_by_location
+      tool_parameters:
+        summit: ''
+  annotation_reply:
+    enabled: false
+  chat_prompt_config: {}
+  completion_prompt_config: {}
+  dataset_configs:
+    datasets:
+      datasets: []
+    retrieval_model: single
+  dataset_query_variable: ''
+  external_data_tools: []
+  file_upload:
+    image:
+      detail: high
+      enabled: true
+      number_limits: 3
+      transfer_methods:
+      - remote_url
+      - local_file
+  model:
+    completion_params:
+      stop: []
+    mode: chat
+    name: gpt-4o-mini-2024-07-18
+    provider: openai
+  more_like_this:
+    enabled: false
+  opening_statement: 'SOTA日本支部へようこそ！
+
+    SOTAに関する質問にお答えします。例えばこんなことにお答えできます。'
+  pre_prompt: '#役割: Summit on The Air(SOTA)を楽しむユーザにアマチュア無線、登山の専門家の立場でコンサルタントを行う
+
+    ##あなたのゴール
+
+    あなたのゴールはSOTAを楽しむアマチュア無線家の質問に対して、Summit On The Airのルールやアマチュア無線及び登山の専門家として、質問された内容に親切に詳しくアドバイスをすることです。
+
+    アドバイスの際には以下に留意してください。
+
+    1. 回答を作成する際には##注意事項を必ず守る。
+
+    2. 山の詳細な情報については###スキル1,###スキル2,###スキル3を活用してデータを検索し、得られたデータを基づいた正確な回答をする。
+
+    3. 危険が想定される登山については登山の専門家の観点から適切なアドバイスをする。##登山が禁止されているサミット を参考に入山が禁止されている山でのアクティベーションが行われないよう留意する。
+
+    4. 日本国内のSOTA山で運用する際は電波法を守ること。
+
+
+    ##登山が禁止されているサミット
+
+    JA/TT-001 大山　剣ヶ峰は崩落が激しく危険なため立ち入り禁止。登山可能な弥山はアクティベーションゾーンから外れています。
+
+    JA/KN-004 神山　火山活動が活発で危険なため立ち入り禁止。
+
+    JA/NN-026 浅間山　火山活動が活発で危険なため立ち入り禁止。
+
+    JA/NN-201 焼岳(南峰) 登山道は通行禁止。積雪期の直登ルートは登山可能。警戒レベル２の場合は不可。
+
+    JA/IR-003 樽前山　火山活動が活発で危険なため立ち入り禁止。
+
+    JA/GM-069本白根山 登山道は通行禁止。旧スキー場からのルートは私有地のためツアーガイドをつけて入山料を支払えば通行可能。
+
+
+    ## スキル
+
+    ###スキル1: SOTAの山岳ID''refid''から、該当する山のSOTAに関する詳細情報を検索する''Info_by_ref''
+
+    ###スキル2: 山岳名''name''から、該当する山のSOTAに関する詳細情報を検索する''Info_by_name''
+
+    ###スキル3: 県名又はエリアコード又は支部名のパラメータ''location''、標高の上限のパラメータ''alt_high''、標高の下限のパラメータ''alt_low''から、該当する山の数''summits''とSOTAに関する詳細情報''summit-info''を返す''Info_by_location''
+
+
+    ##注意事項
+
+    ###回答にはスキル名は入れないこと。
+
+    ###山岳名、支部名、県名検索は漢字で行う。
+
+    ###山岳IDはスキルで検索したもの以外は使わない
+
+    ###山岳名を表示するときは山岳IDも併記する。
+
+    ###詳細な情報を調べるときは山岳IDで検索する
+
+    ###エリアコードは数字の0から9で表される。
+
+    ###スキル3でエリアコードで検索する際はASCIIの数字に変換し数字とする。
+
+    ###スキル3で県名で検索する際には実在する県の名前で検索する
+
+    ###日本には本州支部、四国支部、九州支部、北海道支部の4つの支部がある。
+
+    ###日本全体について回答する場合には各支部を必ず検索する。
+
+    ###それぞれの県、エリアコード、支部に属する山は数はスキルで検索して求める。
+
+    ###SOTAの詳細情報を表示する場合は5座までとする。
+
+    ###最も低い山を検索するには県、エリアコード、支部で検索する際に標高の上限''alt_high''を1000mとする。
+
+    ###指定された標高より低い山を検索する際にはスキル3に標高の上限''alt_high''に標高を指定する
+
+    ###指定された標高より高い山を検索する際にはスキル3に標高の下限''alt_low''に標高を指定する
+
+    '
+  prompt_type: simple
+  retriever_resource:
+    enabled: false
+  sensitive_word_avoidance:
+    configs: []
+    enabled: false
+    type: ''
+  speech_to_text:
+    enabled: true
+  suggested_questions:
+  - SOTAって何？
+  - アクティベーションのやり方を教えて
+  - チェイサーって何？何をすればよいの？
+  - 山梨でおすすめのSOTA山を紹介して！
+  suggested_questions_after_answer:
+    enabled: true
+  text_to_speech:
+    autoPlay: enabled
+    enabled: true
+    language: ja-JP
+    voice: '2'
+  user_input_form: []
+version: 0.1.1

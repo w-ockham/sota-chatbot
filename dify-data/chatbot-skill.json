@@ -1,0 +1,148 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Get SOTA Summit Information ",
+        "description": "Retrieves SOTA Summit data for a summit.",
+        "version": "v1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://sotalive.net/api"
+        }
+    ],
+    "paths": {
+        "/summit-info/refid": {
+            "get": {
+                "description": "山岳IDから詳細情報を検索",
+                "operationId": "Info_by_ref",
+                "parameters": [
+                    {
+                        "name": "refid",
+                        "in": "query",
+                        "description": "山岳IDから詳細情報を検索",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": [
+                    {
+                        "200": {
+                            "content": "application/json"
+                        }
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/summit-info/name": {
+            "get": {
+                "description": "山岳名から詳細情報を検索",
+                "operationId": "Info_by_name",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "山岳名から詳細情報を検索",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": [
+                    {
+                        "200": {
+                            "content": "application/json"
+                        }
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/summit-info/location": {
+            "get": {
+                "description": "県名又はエリア名又は支部名から詳細情報を検索",
+                "operationId": "Info_by_location",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                     {
+                        "name": "alt_high",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "alt_low",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": [
+                    {
+                        "200": {
+                            "content": "application/json"
+                        }
+                    }
+                ],
+                "deprecated": false
+            }
+        },
+        "/summit-count/location": {
+            "get": {
+                "description": "県名又はエリア名又は支部名から山岳数をカウント",
+                "operationId": "Count_by_location",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                     {
+                        "name": "alt_high",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "alt_low",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": [
+                    {
+                        "200": {
+                            "content": "application/json"
+                        }
+                    }
+                ],
+                "deprecated": false
+            }
+        },     
+    },
+    "components": {
+        "schemas": {}
+    }
+}
