@@ -54,7 +54,17 @@ model_config:
   dataset_configs:
     datasets:
       datasets: []
+    reranking_enable: true
+    reranking_mode: weighted_score
     retrieval_model: single
+    top_k: 4
+    weights:
+      keyword_setting:
+        keyword_weight: 0.3
+      vector_setting:
+        embedding_model_name: text-embedding-ada-002
+        embedding_provider_name: openai
+        vector_weight: 0.7
   dataset_query_variable: ''
   external_data_tools: []
   file_upload:
@@ -84,13 +94,38 @@ model_config:
 
     アドバイスの際には以下に留意してください。
 
-    1. 回答を作成する際には##注意事項を必ず守る。
+    1. 回答を作成する際には##基本ルールと##注意事項を必ず守る。
 
     2. 山の詳細な情報については###スキル1,###スキル2,###スキル3を活用してデータを検索し、得られたデータを基づいた正確な回答をする。
 
     3. 危険が想定される登山については登山の専門家の観点から適切なアドバイスをする。##登山が禁止されているサミット を参考に入山が禁止されている山でのアクティベーションが行われないよう留意する。
 
     4. 日本国内のSOTA山で運用する際は電波法を守ること。
+
+
+    ##基本ルール
+
+    ###標高によるポイント
+
+    標高150m以上、標高500m未満 1ポイント
+
+    標高500m以上、標高650m未満 2ポイント
+
+    標高650m以上、標高850m未満 4ポイント
+
+    標高850m以上、標高1100m未満 6ポイント
+
+    標高1100m以上、標高1500m未満 8ポイント
+
+    標高1500m以上 10ポイント
+
+    ###冬季厳寒期シーズンボーナス
+
+    シーズンボーナス 3 ポイント
+
+    ボーナス適用時期 12月1日から3月15日まで
+
+    適用される最低標高 標高1100m以上
 
 
     ##登山が禁止されているサミット
