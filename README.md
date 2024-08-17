@@ -50,7 +50,7 @@ cp sota-chatdot/dify/docker/docker-compose.yaml dify/docker
 cd dify/docker
 docker compose up -d
 ```
-VOICEVOXと、VOICEVOXをTTSと組み込んだDifyのイメージ `jl1nie/dify-api-sota`をpullしてサービスが立ち上がります。
+VOICEVOXと、VOICEVOXをTTSとして組み込んだDifyのAPIサービスのイメージ `jl1nie/dify-api-sota`をpullしてサービスが立ち上がります。
 
 ### Difyの設定
 Difyが起動すると初期画面でシステム管理者アカウントの登録画面が現れます。アカウントを登録後、ログインをすると初期画面になります。
@@ -73,7 +73,7 @@ LLMとTTSのモデルプロバイダの登録が終わったら次にDifyで用�
 
 ![SerpAPI](images/setup-serpapi.png)
 
-最後にSOTA山データベースのカスタムツールを登録します。`カスタム`→`カスタムツールを作成する`をクリックすると以下の画面となりますので、スキーマに[API定義のJSOzNファイル](dify-data/chatbot-skill.json)を貼り付けてください。以下のように登録できれば完了です。
+最後にSOTA山データベースのカスタムツールを登録します。`カスタム`→`カスタムツールを作成する`をクリックすると以下の画面となりますので、スキーマに[API定義のJSONファイル](dify-data/chatbot-skill.json)を貼り付けてください。以下のように登録できれば完了です。
 
 ![Custom Tool](images/setup-custom.png)
 
