@@ -190,18 +190,14 @@ services:
     environment:
     # Use the shared environment variables.
       <<: *shared-api-worker-env
-      # Startup mode, 'api' starts the API server.
-      MODE: api
     hostname: voicevox
     ports:
       - "50021:50021"
     networks:
-      - ssrf_proxy_network
       - default
   # API service
   api:
-    #image: langgenius/dify-api:0.7.0
-    build: ../api
+    image: jl1nie/dify-api-sota
     restart: always
     environment:
       # Use the shared environment variables.
@@ -221,7 +217,7 @@ services:
   # worker service
   # The Celery worker for processing the queue.
   worker:
-    image: langgenius/dify-api:0.7.0
+    image: jl1nie/dify-api-sota
     restart: always
     environment:
       # Use the shared environment variables.
