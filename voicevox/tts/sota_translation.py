@@ -78,6 +78,7 @@ translation_table = {
     'half': 'ハーフ',
     'ham' : 'ハム',
     'hamalert': 'ハムアラート',
+    'hamlog': 'ハムログ',
     'happy': 'ハッピー',
     'hole' : 'ホール',
     'honour' : 'オナー',
@@ -109,6 +110,7 @@ translation_table = {
     'official' : 'オフィシャル',
     'other' : 'アザー',
     'package': 'パッケージ',
+    'packages': 'パッケージズ',
     'packtenna': 'パックテナ',
     'par': 'パー',
     'park': 'パーク',
@@ -178,9 +180,13 @@ translation_table = {
 
 logger = logging.getLogger(__name__)
 
+chunk_buffer = ""
+
 def sota_translation(content: str) -> str:
+    global chunk_buffer
     mecab = MeCab.Tagger(ipadic.MECAB_ARGS)
     content = re.sub(r'\*\*','',content)
+    content , chunk_buffer = remove_urls_from_chunk(content, chunk_buffer)
     content_lines = content.split('\n')
     translation_result = []
     for line in content_lines:
@@ -211,9 +217,29 @@ def sota_translation(content: str) -> str:
                 node = node.next
 
         replaced_line = [translation_table.get(node.lower(), node) for node in nodes if node]
-        logger.warning(f"replaced = {replaced_line}")
+        #logger.warning(f"chunk replaced = {replaced_line}")
         translation_result.append(''.join(replaced_line))
 
     result = '\n '.join(translation_result)
-    logger.warning(f"result = {content} -> {result}")    
+    #logger.warning(f"translation result = {content} ->\n{result}")
     return result
+
+def remove_urls_from_chunk(chunk, buffer=""):
+    url_pattern = re.compile(r'https?:[^\s()]+')
+    combined = buffer + re.sub(r'（|）',' ',chunk)
+    matches = list(url_pattern.finditer(combined))
+    if matches:
+        cleaned_chunk = url_pattern.sub(r'', combined)
+        removed = 0
+        for m in matches:
+            start, end = m.span()
+            if start > len(buffer):
+                break
+            if end > len(buffer):
+                removed += len(buffer) - start
+            else:
+                removed = end - start
+        cleaned_chunk = cleaned_chunk[len(buffer)-removed:]
+        return cleaned_chunk, chunk
+    else:
+        return chunk, ""

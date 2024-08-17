@@ -185,6 +185,19 @@ x-shared-env: &shared-api-worker-env
   SSRF_PROXY_HTTPS_URL: ${SSRF_PROXY_HTTPS_URL:-http://ssrf_proxy:3128}
 
 services:
+  voicevox:
+    image: voicevox/voicevox_engine:cpu-ubuntu20.04-latest
+    environment:
+    # Use the shared environment variables.
+      <<: *shared-api-worker-env
+      # Startup mode, 'api' starts the API server.
+      MODE: api
+    hostname: voicevox
+    ports:
+      - "50021:50021"
+    networks:
+      - ssrf_proxy_network
+      - default
   # API service
   api:
     #image: langgenius/dify-api:0.7.0
