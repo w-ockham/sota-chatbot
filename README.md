@@ -69,7 +69,7 @@ LLMとTTSのモデルプロバイダの登録が終わったら次にDifyで用�
 
 ![System Model](images/setup-system-model.png)
 
-次にチャットボットが用いる検索ツールの登録を行います。`ツール`→`組み込み`を選択するとツールの一覧が表示されます。ここでは`Google`を選択し、[SerpAPI](https://serpapi.com/)で発行したAPIキーを設定してください。月間1000アクセスまでは無料で使用できます。
+次にチャットボットが用いる検索ツールの登録を行います。`ツール`→`組み込み`を選択するとツールの一覧が表示されます。ここでは`Google`を選択し、[SerpAPI](https://serpapi.com/)で発行したAPIキーを設定してください。月間100アクセスまでは無料で使用できます。
 
 ![SerpAPI](images/setup-serpapi.png)
 

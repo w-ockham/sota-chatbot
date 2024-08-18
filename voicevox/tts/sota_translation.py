@@ -238,7 +238,7 @@ def remove_urls_from_chunk(chunk, buffer=""):
             if end > len(buffer):
                 removed += len(buffer) - start
             else:
-                removed = end - start
+                removed += end - start
         cleaned_chunk = cleaned_chunk[len(buffer)-removed:]
         return cleaned_chunk, chunk
     else:
