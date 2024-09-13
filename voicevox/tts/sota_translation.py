@@ -20,7 +20,7 @@ class TTStranslation:
             try:
                 with open(os.path.join(path, table_name)) as f:
                     translist = f.readlines()
-                    logger.warning(f"read translation rules = {translist}")
+                    logger.info(f"read translation rules = {translist}")
             except Exception as e:
                 translist = []
 
@@ -67,10 +67,9 @@ class TTStranslation:
             replaced_line = [
                 self.translation_table.get(node.lower(), node) for node in nodes if node
             ]
-            self.logger.warning(f"chunk replaced = {replaced_line}")
             translation_result.append("".join(replaced_line))
         result = "\n ".join(translation_result)
-        self.logger.warning(f"translation result = {content} ->\n{result}")
+        self.logger.info(f"translation result = {content} ->\n{result}")
         return result
 
     def remove_urls_from_chunk(self, chunk: str) -> str:

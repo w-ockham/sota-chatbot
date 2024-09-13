@@ -4,6 +4,7 @@ from io import BytesIO
 from typing import Optional
 from pydub import AudioSegment
 import httpx
+import re
 from core.model_runtime.model_providers.__base.tts_model import TTSModel
 from core.model_runtime.errors.validate import CredentialsValidateFailedError
 from core.model_runtime.errors.invoke import (
@@ -24,6 +25,9 @@ class VoicevoxText2SpeechModel(TTSModel):
 
     def __init__(self):
         self.tts_translation = TTStranslation()
+        self.voicevox_tag = r"#voicevox_speaker"
+        self.voicevox_pat = re.compile(self.voicevox_tag + r"\s*=\s*(\d+)")
+        self.last_speaker = None
 
     def _invoke(
         self,
@@ -58,6 +62,15 @@ class VoicevoxText2SpeechModel(TTSModel):
         except Exception as ex:
             raise CredentialsValidateFailedError(str(ex))
 
+    def _voicevox_speaker(self, sentence, default_speaker):
+        matches = self.voicevox_pat.findall(sentence)
+        speaker = matches[-1] if matches else None
+        if not speaker:
+            speaker = self.last_speaker if self.last_speaker else default_speaker
+        self.last_speaker = speaker
+        result = self.voicevox_pat.sub("", sentence)
+        return (speaker, result)
+
     def _tts_invoke(
         self, model: str, credentials: dict, content_text: str, voice: str
     ) -> any:
@@ -83,7 +96,10 @@ class VoicevoxText2SpeechModel(TTSModel):
                         voice=voice,
                         api_base=credentials["voicevox_api_base"],
                     )
-                    for sentence in sentences
+                    for (voice, sentence) in map(
+                        lambda sentence: self._voicevox_speaker(sentence, voice),
+                        sentences,
+                    )
                 ]
                 for future in futures:
                     if future.result():

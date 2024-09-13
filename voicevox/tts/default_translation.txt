@@ -24,6 +24,7 @@ antenna: アンテナ
 antennas: アンテナ
 anywhere: エニィフェア
 app: アップ
+association: アソシエーション
 award: アワード
 awards: アワード
 band: バンド
@@ -53,6 +54,7 @@ database: データベース
 date: デート
 defined: デファインド
 deluxe: デラックス
+dify: ディファイ
 dipole: ダイポール
 discovery: ディスカバリー
 elecraft: エレクラフト
@@ -82,8 +84,10 @@ ii: ツー
 iii: スリー
 is: イズ
 it: イット
+john: ジョン
 kenwood: ケンウッド
 labs: ラボラトリーズ
+linford: リンフォード
 log: ログ
 logbook: ログブック
 logs: ログ
@@ -101,6 +105,7 @@ mkii: マークツー
 mkiii: マークスリー
 my: マイ
 myantennas: マイアンテナズ
+newstead: ニューステッド
 official: オフィシャル
 on: オン
 other: アザー
@@ -123,6 +128,7 @@ radio: ラディオ
 reference: リファレンス
 references: リファレンス
 register: レジスター
+richard: リチャード
 river: リバー
 roll: ロール
 s2s: エスツーエス
